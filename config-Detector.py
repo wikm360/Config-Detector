@@ -1,13 +1,16 @@
 config_inpt = input("Enter ypur Config : ").lower()
-"vless://310caefd-0cdb-4e93-a695-29a800b4e616@op2mtnir.l.wikm.eu.org:2053?security=tls&type=ws&host=ground.wikmgg.top&headerType=&path=%2Fwikm2053&sni=ground.wikmgg.top&fp=chrome&alpn=http%2F1.1#CDN-MTN%F0%9F%9F%A2"
 uuid = "uuid"
 address = "google.com"
 port = "443"
 security = "tls"
 transmit = "type" # example : ws
 host = "subdomain.com"
+path = "/admin"
+sni = "subdomain.com"
+fingerprint = "chrome"
 #type detect
 type=config_inpt.split(":")[0]
+name = config_inpt.split("#")[1]
 if type == "vless" :
     uuid = config_inpt.split("@")[0].split("//")[1]
     address = config_inpt.split("@")[1].split(":")[0]
@@ -25,6 +28,15 @@ if type == "vless" :
              transmit = sec2_list[i].split("=")[1]
         elif "host" in str_sec2_list : 
             host = sec2_list[i].split("=")[1]
+        elif "path" in str_sec2_list :
+            path = sec2_list[i].split("=")[1].split("%2f")[1]
+        elif "sni" in str_sec2_list :
+            sni = sec2_list[i].split("=")[1]
+        elif "fp" in str_sec2_list :
+            fingerprint = sec2_list[i].split("=")[1]
+        elif "alpn" in str_sec2_list :
+            alpn = sec2_list[i].split("=")[1].split("#")[0]
+
 
 print(type)
 print(uuid)
@@ -33,3 +45,8 @@ print(port)
 print(security)
 print(transmit)
 print(host)
+print(path)
+print(sni)
+print(fingerprint)
+print(alpn)
+print(name)
