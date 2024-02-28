@@ -4,7 +4,7 @@ uuid = "uuid"
 address = "google.com"
 port = "443"
 security = "tls"
-transmit = "type"
+transmit = "type" # example : ws
 host = "subdomain.com"
 #type detect
 type=config_inpt.split(":")[0]
@@ -18,15 +18,12 @@ if type == "vless" :
     count = len(sec2_list)
     for i in range(0,count) :
         str_sec2_list = str(sec2_list[i])
-        words = transmit.split()
-        if "security" in sec2_list[i] :
+        if "security" in str_sec2_list :
             security = sec2_list[i].split("=")[1]
-        for word in words:
-            if word == sec2_list[i].split("=")[1]:
-               return True
-        # elif words in str_sec2_list :
-        #     transmit = sec2_list[i].split("=")[1]
-        elif "host" in sec2_list[i] : 
+        # finde transmit
+        elif transmit in str_sec2_list :
+             transmit = sec2_list[i].split("=")[1]
+        elif "host" in str_sec2_list : 
             host = sec2_list[i].split("=")[1]
 
 print(type)
